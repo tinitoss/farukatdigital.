@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playlist Movie Upload</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>FarukatDIGITAL</h1>
+
+    <!-- Search Section -->
+    <div class="search-section">
+      <input type="text" id="searchPlaylist" placeholder="Kërko Playlist" oninput="searchPlaylists()">
+      <input type="text" id="searchMovie" placeholder="Kërko Filma" oninput="searchMovies()">
+    </div>
+
+    <!-- Filter by Category -->
+    <div class="filter-section">
+      <select id="movieCategoryFilter" onchange="filterMoviesByCategory()">
+        <option value="">Select Category</option>
+        <option value="Action">Action</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Horror">Horror</option>
+      </select>
+    </div>
+
+    <!-- Sort Playlists -->
+    <div class="sort-section">
+      <button onclick="sortPlaylistsByName()">Sort Playlists by Name</button>
+      <button onclick="sortPlaylistsByDate()">Sort Playlists by Date</button>
+    </div>
+
+    <!-- Create Playlist Section -->
+    <div class="create-playlist-section">
+      <h2>Krijo Playlist</h2>
+      <input type="text" id="playlistName" placeholder="Emri i Playlist" required>
+      <input type="file" id="playlistThumbnail" accept="image/*" required>
+      <button onclick="createPlaylist()">Krijo Playlist</button>
+    </div>
+
+    <!-- Playlist List -->
+    <div id="playlistList" class="playlist-list"></div>
+
+    <!-- Movie Upload Section -->
+    <div id="movieUploadSection" class="upload-section" style="display: none;">
+      <h2>Ngarko Filma në Playlist</h2>
+      <div id="playlistHeader"></div>
+      <button onclick="exitPlaylist()">Dil nga Playlist</button>
+      
+      <input type="text" id="movieName" placeholder="Emri i Filmit" required>
+      <input type="text" id="movieCategory" placeholder="Kategoria" required>
+
+      <label for="movieFile" class="upload-label">
+        <i class="fas fa-video"></i>
+      </label>
+      <input type="file" id="movieFile" accept="video/*" required style="display:none;">
+
+      <label for="movieThumbnail" class="upload-label">
+        <i class="fas fa-image"></i>
+      </label>
+      <input type="file" id="movieThumbnail" accept="image/*" required style="display:none;">
+      
+      <button onclick="uploadMovie()">Ngarko Filmin</button>
+      <div id="movieList"></div>
+    </div>
+
+    <!-- Fullscreen Video Section -->
+    <div id="fullscreenVideo" class="fullscreen-video">
+      <video controls></video>
+      <button onclick="closeFullscreen()">Mbyll</button>
+    </div>
+  </div>
+
+  <!-- Optional Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

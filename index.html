@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        /* General Body and Page Settings */
+        body {
+            font-family: 'Dancing Script', cursive, sans-serif; /* Handwritten-style font */
+            background-color: #f8f8f8; /* Light background */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Center the content vertically */
+            height: 100vh; /* Full viewport height */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px; /* Set a maximum width for the form */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            border-radius: 20px; /* Smaller round corners */
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem; /* Smaller title */
+            color: #ff6f61; /* Relaxed orange tone */
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 1.2rem; /* Smaller subheading */
+            color: #ff6f61;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+        }
+
+        h3 {
+            font-size: 1rem; /* Smaller text for descriptions */
+            color: #555;
+            font-weight: normal;
+            text-align: center;
+        }
+
+        /* Search Section */
+        .search-section input {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            border-radius: 15px; /* Slightly round corners */
+            border: 2px solid #ff6f61;
+            background-color: #fff;
+            font-size: 1rem; /* Slightly smaller font */
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .search-section input::placeholder {
+            color: #888;
+        }
+
+        /* Search input hover */
+        .search-section input:hover {
+            border-color: #ff3b2e;
+        }
+
+        /* Forgot Password Link */
+        .forgot-password {
+            display: block;
+            text-align: center;
+            color: #ff6f61;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        /* Button Styling */
+        .create-playlist-section button {
+            padding: 12px 24px;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .create-playlist-section button:hover {
+            background-color: #ff3b2e;
+            transform: scale(1.05);
+        }
+
+        /* Message styling */
+        .message {
+            text-align: center;
+            color: red;
+            margin-top: 15px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .search-section input,
+            .create-playlist-section button {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+
+            .forgot-password {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .search-section input,
+            .create-playlist-section button {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Login</h1>
+        <div id="login-form">
+            <h2>Login to your account</h2>
+            <input type="text" id="username" class="search-section input" placeholder="Username" />
+            <input type="password" id="password" class="search-section input" placeholder="Password" />
+            <button class="create-playlist-section button" onclick="login()">Login</button>
+            <span class="forgot-password" onclick="showForgotPassword()">Forgot password?</span>
+        </div>
+        <div id="forgot-password-form" style="display: none;">
+            <input type="email" id="email" class="search-section input" placeholder="Enter your email" />
+            <button class="create-playlist-section button" onclick="recoverPassword()">Recover Password</button>
+            <span class="forgot-password" onclick="showLoginForm()">Back to Login</span>
+        </div>
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        // Admin credentials
+        const adminUsername = "admin";
+        const adminPassword = "kafenejaime321";  // Updated password
+        const adminEmail = "babajem16@gmail.com";
+        
+        // Function to navigate to index.html page
+        function redirectToIndex() {
+            window.location.href = "home.html";  // Redirects to the index page
+        }
+
+        // Show login form
+        function showLoginForm() {
+            document.getElementById("login-form").style.display = "block";
+            document.getElementById("forgot-password-form").style.display = "none";
+            document.getElementById("message").innerHTML = "";
+        }
+
+        // Show forgot password form
+        function showForgotPassword() {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("forgot-password-form").style.display = "block";
+            document.getElementById("message").innerHTML = "";
+        }
+
+        // Login function
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Check if username and password are correct
+            if (username === adminUsername && password === adminPassword) {
+                redirectToIndex();  // Redirect to index.html page
+            } else {
+                document.getElementById("message").innerHTML = "Incorrect username or password.";
+            }
+        }
+
+        // Password recovery function (using email)
+        function recoverPassword() {
+            const email = document.getElementById("email").value;
+
+            if (email === adminEmail) {
+                redirectToIndex();  // Redirect to index.html page
+            } else {
+                document.getElementById("message").innerHTML = "Email does not match. Access denied.";
+            }
+        }
+    </script>
+</body>
+</html>
